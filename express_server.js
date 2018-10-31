@@ -7,6 +7,9 @@ app.set("view engine", "ejs");
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 
+const cookieParser = require("cookie-parser");
+app.use(cookieParser());
+
 var urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com"
@@ -28,13 +31,15 @@ function generateRandomString() {
 }
 
 
-
+// Redirects to a hardcoded local root:
+//  http://localhost:/8080/urls/
+// The root is concatenated with 'path' if supplied
 express.response.redirectLocal = function(path) {
 
   var redirectURL = "http://localhost:8080/urls/" + ((path) ? path : "");
   this.redirect(redirectURL);
 
-}
+};
 
 
 
@@ -45,7 +50,10 @@ app.get("/", (req, res) => {
 
 
 app.get("/urls", (req, res) => {
-  let templateVars = {urls: urlDatabase};
+  let templateVars = {
+    urls: urlDatabase,
+    username: req.cookies["username"]
+  };
   res.render("urls_index", templateVars);
 });
 
@@ -61,7 +69,8 @@ app.post("/urls", (req, res) => {
 app.get("/urls/:id", (req, res) => {
   let templateVars = {
     shortURL: req.params.id,
-    longURL: urlDatabase[req.params.id]
+    longURL: urlDatabase[req.params.id],
+    username: req.cookies["username"]
   };
   res.render("urls_show", templateVars);
 });
@@ -83,7 +92,10 @@ app.post("/urls/:id/delete", (req, res) => {
 
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {
+    username: req.cookies["username"]
+  };
+  res.render("urls_new", templateVars);
 });
 
 app.get("/u/:shortURL", (req, res) => {
@@ -104,6 +116,15 @@ app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 });
 
+app.post("/login", (req, res) => {
+  res.cookie("username", req.body.username);
+  res.redirectLocal();
+});
+
+app.post("/logout", (req, res) => {
+  res.clearCookie("username");
+  res.redirectLocal();
+});
 
 
 
