@@ -29,6 +29,15 @@ function generateRandomString() {
 
 
 
+express.response.redirectLocal = function(path) {
+
+  var redirectURL = "http://localhost:8080/urls/" + ((path) ? path : "");
+  this.redirect(redirectURL);
+
+}
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello!");
@@ -45,8 +54,7 @@ app.post("/urls", (req, res) => {
   urlDatabase[str] = req.body.longURL;
   console.log(req.body.longURL + " -> " + str);
 
-  var redirectURL = "http://localhost:8080/urls/" + str;
-  res.redirect(redirectURL);
+  res.redirectLocal(str);
 });
 
 
@@ -62,16 +70,14 @@ app.post("/urls/:id", (req, res) => {
 
   urlDatabase[req.params.id] = req.body.newURL;
 
-  var redirectURL = "http://localhost:8080/urls/";
-  res.redirect(redirectURL);
+  res.redirectLocal();
 });
 
 
 
 app.post("/urls/:id/delete", (req, res) => {
   delete urlDatabase[req.params.id];
-  var redirectURL = "http://localhost:8080/urls/";
-  res.redirect(redirectURL);
+  res.redirectLocal();
 });
 
 
@@ -85,7 +91,6 @@ app.get("/u/:shortURL", (req, res) => {
   const short = req.params.shortURL;
 
   if (urlDatabase[short]) {
-    console.log("redirecting " + short + " -> " + urlDatabase[short]);
     res.redirect(urlDatabase[short]);
   }
 
@@ -98,10 +103,6 @@ app.get("/urls.json", (req, res) => {
 app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 });
-
-
-
-
 
 
 
