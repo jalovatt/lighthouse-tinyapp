@@ -2,12 +2,22 @@
 <html lang="en">
 <head>
   <title>TinyApp</title>
+  <style>
+  form { display: inline-block }
+  </style>
 </head>
 <body>
   <% include ./partials/_header %>
-  <% Object.keys(urls).forEach(key => { %>
-    <li><%= key %> - <%= urls[key] %></li>
-  <% }); %>
+  <table>
+    <% Object.keys(urls).forEach(key => { %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= urls[key] %></td>
+        <td><form method="POST" action="/urls/<%= key %>/delete"><input type="submit" value="Delete"></form></td>
+      </tr>
+    <% }); %>
+  </table>
+  <br>
   <a href="#">Shorten a URL</a>
 </body>
 </html>

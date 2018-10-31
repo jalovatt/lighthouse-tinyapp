@@ -50,6 +50,12 @@ app.post("/urls", (req, res) => {
 });
 
 
+app.post("/urls/:id/delete", (req, res) => {
+  delete urlDatabase[req.params.id];
+  var redirectURL = "http://localhost:8080/urls/";
+  res.redirect(redirectURL);
+});
+
 
 
 app.get("/urls/new", (req, res) => {
