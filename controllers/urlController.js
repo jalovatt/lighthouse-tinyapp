@@ -70,7 +70,12 @@ exports.postURLsID = function (req, res) {
   let id = req.session.user_id;
 
   if (!id) {
-    res.redirect("/login");
+    res.render("not_allowed");
+    return;
+  }
+
+  if (db.urls[req.params.id].user !== id) {
+    res.render("not_yours", {user: db.users[id]});
     return;
   }
 

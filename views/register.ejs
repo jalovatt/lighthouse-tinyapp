@@ -8,9 +8,11 @@
   <input type="submit" value="Submit">
 </form>
 <% if (locals.userExists) { %>
-  <span class="err">A user with that email address already exists</span>
+  <br>
+  <h4 class="err">A user with that email address already exists</h4>
 <% } else if (locals.invalidData) { %>
-  <span class="err">Invalid email address or password</span>
+  <br>
+  <h4 class="err">Invalid email address or password</h4>
 <% } %>
 
 <% include ./partials/_footer %>
