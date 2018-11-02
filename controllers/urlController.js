@@ -26,7 +26,7 @@ exports.getURLsID = function (req, res) {
   let id = req.cookies["user_id"];
 
   if (db.urls[req.params.id].user !== id) {
-    res.redirect("/");
+    res.render("not_allowed", {user: db.users[id]});
     return;
   }
 

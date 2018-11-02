@@ -30,7 +30,6 @@ exports.validateLogin = function(email, pwd) {
 
 exports.getUserURLs = function(id) {
 
-  console.log("getting URLs for user: " + id);
   let out = {};
   Object.keys(db.urls).forEach( entry => {
     if (db.urls[entry].user === id) {
