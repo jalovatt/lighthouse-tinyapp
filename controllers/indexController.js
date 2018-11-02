@@ -10,9 +10,6 @@ exports.getIndex = function (req, res) {
   }
 };
 
-exports.getHello = function (req, res) {
-  res.send("<html><body>Hello <b>World</b></body></html>\n");
-};
 
 exports.getLogin = function (req, res) {
   res.render("login");
