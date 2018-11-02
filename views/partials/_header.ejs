@@ -1,16 +1,19 @@
 
-<style>
-  form { display: inline-block; }
-  .err { color: red; }
-  input[type=text] { width: 300px }
-  a { color: black; text-decoration: none; }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TinyApp</title>
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+</head>
+<body>
+
 <header>
-  <h1><a href="/">TinyApp</a></h1>
+  <h1><a class="appTitle" href="/">TinyApp</a></h1>
+  <div class="loginStatus">
     <% if (locals.user) { %>
-      Logged in as <%= user.email %> | <form method="POST" action="/logout"><input type="submit" value="Log Out"></form>
+      <span class="loginText">Logged in as </span><span class="loginID"><%= user.email %></span><form method="POST" action="/logout"><input type="submit" value="Log Out" class="headerButton"></form>
     <% } else { %>
-      <form method="GET" action="/login"><input type="submit" value="Log In"></form> <form method="GET" action="/register"><input type="submit" value="Register"></form>
+      <form method="GET" action="/login"><input type="submit" value="Log In" class="headerButton"></form> <form method="GET" action="/register"><input type="submit" value="Register" class="headerButton"></form>
     <% } %>
+  </div>
 </header>
-<hr>

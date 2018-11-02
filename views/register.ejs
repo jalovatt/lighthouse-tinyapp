@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>TinyApp</title>
-  <style>
-    .err {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-  <% include ./partials/_header %>
-  <h2>Register</h2>
-  <form method="POST" action="/register">
-    Email Address: <input type="email" name="email"><br>
-    Password: <input type="password" name="pwd"><br>
-    <input type="submit" value="Submit">
-  </form>
-  <% if (locals.userExists) { %>
-    <span class="err">A user with that email address already exists</span>
-  <% } else if (locals.invalidData) { %>
-    <span class="err">Invalid email address or password</span>
-  <% } %>
-</body>
-</html>
+<% include ./partials/_header %>
+
+<h2>Register</h2>
+<form method="POST" action="/register">
+  Email Address: <input type="email" name="email"><br>
+  Password: <input type="password" name="pwd"><br>
+  <input type="submit" value="Submit">
+</form>
+<% if (locals.userExists) { %>
+  <span class="err">A user with that email address already exists</span>
+<% } else if (locals.invalidData) { %>
+  <span class="err">Invalid email address or password</span>
+<% } %>
+
+<% include ./partials/_footer %>
