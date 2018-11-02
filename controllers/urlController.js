@@ -25,7 +25,7 @@ exports.postURLs = function (req, res) {
   let id = req.session.user_id;
 
   if (!id) {
-    res.redirect("/login");
+    res.render("not_allowed");
     return;
   }
 
