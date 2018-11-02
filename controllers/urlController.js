@@ -31,7 +31,6 @@ exports.postURLs = function (req, res) {
 
   var str = controller.generateRandomString();
   db.urls[str] = {url: req.body.longURL, user: req.session.user_id};
-  console.log(req.body.longURL + " -> " + str);
 
   res.redirectLocal(str);
 };
@@ -45,12 +44,25 @@ exports.getURLsID = function (req, res) {
     return;
   }
 
+  let shortURL = req.params.id;
+
+  if (!db.urls[shortURL]) {
+    res.render("not_found", {user: db.users[id]});
+    return;
+  }
+
+  if (db.urls[shortURL].user !== id) {
+    res.render("not_yours", {user: db.users[id]});
+    return;
+  }
+
   let templateVars = {
-    shortURL: req.params.id,
-    longURL: db.urls[req.params.id].url,
+    shortURL: shortURL,
+    longURL: db.urls[shortURL].url,
     user: db.users[id]
   };
   res.render("urls_show", templateVars);
+
 };
 
 exports.postURLsID = function (req, res) {
