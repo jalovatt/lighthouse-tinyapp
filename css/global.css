@@ -147,3 +147,10 @@ a {
   text-decoration: none;
 
 }
+
+label {
+  display: inline-block;
+  text-align: right;
+  width: 110px;
+  padding-right: 8px;
+}
