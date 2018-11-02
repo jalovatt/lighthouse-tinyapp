@@ -30,7 +30,7 @@ exports.postLogin = function (req, res) {
 
 exports.postLogout = function (req, res) {
   res.clearCookie("user_id");
-  res.redirectLocal();
+  res.redirect("/");
 };
 
 exports.getRegister = function (req, res) {
