@@ -37,8 +37,6 @@ router.post("/urls/:id/delete", urlController.postDelete);
 
 router.get( "/u/:shortURL",     urlController.getShortURL);
 
-router.get( "/urls.json",       urlController.getURLsJSON);
-
 router.get( "/*",               indexController.notFound);
 
 module.exports = router;
