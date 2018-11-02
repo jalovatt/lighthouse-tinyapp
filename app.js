@@ -19,6 +19,7 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+app.use("/css", express.static(__dirname + "/css"));
 app.use(router);
 
 app.listen(config.port, () => {
