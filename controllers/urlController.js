@@ -89,7 +89,12 @@ exports.postDelete = function (req, res) {
   let id = req.session.user_id;
 
   if (!id) {
-    res.redirect("/login");
+    res.redirect("not_allowed");
+    return;
+  }
+
+  if (db.urls[req.params.id].user !== id) {
+    res.render("not_yours", {user: db.users[id]});
     return;
   }
 

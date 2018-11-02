@@ -11,7 +11,13 @@ exports.getIndex = function (req, res) {
 
 
 exports.getLogin = function (req, res) {
-  res.render("login");
+
+  if (req.session.user_id) {
+    res.redirect("/urls");
+  } else {
+    res.render("login");
+  }
+
 };
 
 exports.postLogin = function (req, res) {
@@ -34,7 +40,12 @@ exports.postLogout = function (req, res) {
 
 exports.getRegister = function (req, res) {
 
-  res.render("register");
+  if (req.session.user_id) {
+    res.redirect("/urls");
+  } else {
+    res.render("register");
+  }
+
 };
 
 exports.postRegister = function (req, res) {
