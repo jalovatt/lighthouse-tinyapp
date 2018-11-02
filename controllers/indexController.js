@@ -1,4 +1,3 @@
-const db = require("../database/database.js");
 const controller = require("./controllerFunctions.js");
 
 exports.getIndex = function (req, res) {
@@ -65,10 +64,7 @@ exports.postRegister = function (req, res) {
     return;
   }
 
-  const id = controller.generateRandomString();
-
-  const hash = controller.getHash(pwd);
-  db.users[id] = {id, email, hash};
+  const id = controller.createNewUser(email, pwd);
 
   req.session.user_id = id;
   res.redirectLocal();

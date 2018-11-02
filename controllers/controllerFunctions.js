@@ -55,3 +55,14 @@ exports.addAnalytics = function(urlID, req) {
 
 
 };
+
+exports.createNewUser = function(email, pwd) {
+
+  const id = exports.generateRandomString();
+
+  const hash = exports.getHash(pwd);
+  db.users[id] = {id, email, hash};
+
+  return id;
+
+}
