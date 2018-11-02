@@ -1,13 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-//const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
-const app = express();
-
-
-const config = require("./config/config");
 const router = require("./router/router");
+const config = require("./config/config");
 
+const app = express();
 
 app.set("view engine", "ejs");
 
@@ -19,10 +16,12 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+// All views share a global stylesheet
 app.use("/css", express.static(__dirname + "/css"));
+
 app.use(router);
 
 app.listen(config.port, () => {
-  var time = new Date().toLocaleTimeString();
+  const time = new Date().toLocaleTimeString();
   console.log(`[${time}] Listening on port ${config.port}`);
 });

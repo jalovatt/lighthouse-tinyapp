@@ -6,14 +6,14 @@ const controller = require("./controllerFunctions.js");
 
 exports.getURLs = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.render("not_allowed");
     return;
   }
 
-  let templateVars = {
+  const templateVars = {
     urls: controller.getUserURLs(id),
     user: db.users[id]
   };
@@ -22,14 +22,14 @@ exports.getURLs = function (req, res) {
 
 exports.postURLs = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.render("not_allowed");
     return;
   }
 
-  var str = controller.generateRandomString();
+  const str = controller.generateRandomString();
   db.urls[str] = {url: req.body.longURL, user: req.session.user_id};
 
   res.redirectLocal(str);
@@ -37,14 +37,14 @@ exports.postURLs = function (req, res) {
 
 exports.getURLsID = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.redirect("/login");
     return;
   }
 
-  let shortURL = req.params.id;
+  const shortURL = req.params.id;
 
   if (!db.urls[shortURL]) {
     res.render("not_found", {user: db.users[id]});
@@ -56,7 +56,7 @@ exports.getURLsID = function (req, res) {
     return;
   }
 
-  let templateVars = {
+  const templateVars = {
     shortURL: shortURL,
     longURL: db.urls[shortURL].url,
     user: db.users[id]
@@ -67,7 +67,7 @@ exports.getURLsID = function (req, res) {
 
 exports.postURLsID = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.render("not_allowed");
@@ -86,7 +86,7 @@ exports.postURLsID = function (req, res) {
 
 exports.postDelete = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.redirect("not_allowed");
@@ -104,14 +104,14 @@ exports.postDelete = function (req, res) {
 
 exports.getNew = function (req, res) {
 
-  let id = req.session.user_id;
+  const id = req.session.user_id;
 
   if (!id) {
     res.redirect("/login");
     return;
   }
 
-  var user = db.users[id];
+  const user = db.users[id];
 
   if (user) {
     res.render("urls_new", {user});

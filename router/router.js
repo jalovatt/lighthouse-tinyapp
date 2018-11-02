@@ -10,7 +10,7 @@ const config = require("../config/config");
 // The root is concatenated with 'path' if supplied
 express.response.redirectLocal = function(path) {
 
-  var redirectURL = config.homeURL + ((path) ? path : "");
+  const redirectURL = config.homeURL + ((path) ? path : "");
   this.redirect(redirectURL);
 
 };

@@ -6,7 +6,7 @@ exports.generateRandomString = function() {
   const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV0123456789";
   const range = chars.length;
 
-  var out = [];
+  const out = [];
   for (let i = 0; i < 6; i++) {
     const idx = Math.floor(Math.random() * range);
     out.push(chars[idx]);
@@ -27,21 +27,21 @@ exports.checkHash = function (pwd, hash) {
 
 exports.userExists = function(email) {
 
-  var id = Object.keys(db.users).find( id => db.users[id].email === email );
+  const id = Object.keys(db.users).find( id => db.users[id].email === email );
   return (id) ? db.users[id] : null;
 
 };
 
 exports.validateLogin = function(email, pwd) {
 
-  var user = exports.userExists(email);
+  const user = exports.userExists(email);
   return (user && exports.checkHash(pwd, user.hash)) ? user.id : null;
 
 };
 
 exports.getUserURLs = function(id) {
 
-  let out = {};
+  const out = {};
   Object.keys(db.urls).forEach( entry => {
     if (db.urls[entry].user === id) {
       out[entry] = db.urls[entry];
