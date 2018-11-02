@@ -1,6 +1,6 @@
 const controller = require("./indexFunctions.js");
 
-exports.getIndex = function (req, res) {
+exports.get_index = function (req, res) {
 
   if (req.session.user_id) {
     res.redirect("/urls");
@@ -11,7 +11,7 @@ exports.getIndex = function (req, res) {
 };
 
 
-exports.getLogin = function (req, res) {
+exports.get_login = function (req, res) {
 
   if (req.session.user_id) {
     res.redirect("/urls");
@@ -21,7 +21,7 @@ exports.getLogin = function (req, res) {
 
 };
 
-exports.postLogin = function (req, res) {
+exports.post_login = function (req, res) {
 
   const id = controller.validateLogin(req.body.email, req.body.pwd);
 
@@ -36,14 +36,14 @@ exports.postLogin = function (req, res) {
 
 };
 
-exports.postLogout = function (req, res) {
+exports.post_logout = function (req, res) {
 
   req.session = null;
   res.redirect("/");
 
 };
 
-exports.getRegister = function (req, res) {
+exports.get_register_user = function (req, res) {
 
   if (req.session.user_id) {
     res.redirect("/urls");
@@ -53,7 +53,7 @@ exports.getRegister = function (req, res) {
 
 };
 
-exports.postRegister = function (req, res) {
+exports.post_register_user = function (req, res) {
 
   const {email, pwd} = req.body;
   if (controller.userExists(email)) {
@@ -71,6 +71,7 @@ exports.postRegister = function (req, res) {
 
 };
 
-exports.notFound = function (req, res) {
+exports.not_found = function (req, res) {
   res.render("not_found");
 };
+

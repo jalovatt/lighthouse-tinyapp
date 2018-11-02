@@ -4,7 +4,7 @@ const db = require("../database/database.js");
 
 
 
-exports.getURLs = function (req, res) {
+exports.get_urls_user = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -21,7 +21,7 @@ exports.getURLs = function (req, res) {
 
 };
 
-exports.postURLs = function (req, res) {
+exports.post_urls_user = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -37,7 +37,7 @@ exports.postURLs = function (req, res) {
 
 };
 
-exports.getURLsID = function (req, res) {
+exports.get_url_id = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -47,32 +47,33 @@ exports.getURLsID = function (req, res) {
   }
 
   const shortURL = req.params.id;
+  const user = db.users[id];
 
   if (!db.urls[shortURL]) {
-    res.render("not_found", {user: db.users[id]});
+    res.render("not_found", {user});
     return;
   }
 
   if (db.urls[shortURL].user !== id) {
-    res.render("not_yours", {user: db.users[id]});
+    res.render("not_yours", {user});
     return;
   }
 
   const templateVars = {
-    shortURL: shortURL,
+    shortURL,
     longURL: db.urls[shortURL].url,
-    user: db.users[id]
+    user
   };
   res.render("urls_show", templateVars);
 
 };
 
-exports.postURLsID = function (req, res) {
+exports.post_url_id = function (req, res) {
 
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed", {user: db.users[id]});
+    res.render("not_allowed");
     return;
   }
 
@@ -86,12 +87,12 @@ exports.postURLsID = function (req, res) {
 
 };
 
-exports.postDelete = function (req, res) {
+exports.post_url_delete = function (req, res) {
 
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed", {user: db.users[id]});
+    res.render("not_allowed");
     return;
   }
 
@@ -105,7 +106,7 @@ exports.postDelete = function (req, res) {
 
 };
 
-exports.getNew = function (req, res) {
+exports.get_urls_new = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -124,12 +125,12 @@ exports.getNew = function (req, res) {
 
 };
 
-exports.getShortURL = function (req, res) {
+exports.get_url_short = function (req, res) {
 
   const short = req.params.shortURL;
 
   if (!db.urls[short]) {
-    res.render("not_found", {user: req.session.user_id});
+    res.render("not_found", {user: db.users[req.session.user_id]});
     return;
   }
 
