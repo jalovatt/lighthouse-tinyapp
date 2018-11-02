@@ -1,4 +1,4 @@
-const controller = require("./controllerFunctions.js");
+const controller = require("./indexFunctions.js");
 
 exports.getIndex = function (req, res) {
 

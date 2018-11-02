@@ -1,5 +1,5 @@
+const controller = require("./urlFunctions.js");
 const db = require("../database/database.js");
-const controller = require("./controllerFunctions.js");
 
 
 

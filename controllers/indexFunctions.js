@@ -1,6 +1,8 @@
 const db = require("../database/database.js");
 const bcrypt = require("bcrypt");
 
+
+
 exports.generateRandomString = function() {
 
   const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV0123456789";
@@ -16,7 +18,6 @@ exports.generateRandomString = function() {
 
 };
 
-
 exports.getHash = function (pwd) {
   return bcrypt.hashSync(pwd, 10);
 };
@@ -24,7 +25,6 @@ exports.getHash = function (pwd) {
 exports.checkHash = function (pwd, hash) {
   return bcrypt.compareSync(pwd, hash);
 };
-
 
 exports.userExists = function(email) {
 
@@ -40,24 +40,6 @@ exports.validateLogin = function(email, pwd) {
 
 };
 
-exports.getUserURLs = function(id) {
-
-  const out = {};
-  Object.keys(db.urls).forEach( entry => {
-    if (db.urls[entry].user === id) {
-      out[entry] = db.urls[entry];
-    }
-  });
-
-  return out;
-
-};
-
-exports.addAnalytics = function(urlID, req) {
-
-
-};
-
 exports.createNewUser = function(email, pwd) {
 
   const id = exports.generateRandomString();
@@ -67,4 +49,4 @@ exports.createNewUser = function(email, pwd) {
 
   return id;
 
-}
+};
