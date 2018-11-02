@@ -50,3 +50,8 @@ exports.getUserURLs = function(id) {
 
   return out;
 };
+
+exports.addAnalytics = function(urlID, req) {
+
+
+};

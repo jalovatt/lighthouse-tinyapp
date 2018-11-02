@@ -115,8 +115,12 @@ exports.getShortURL = function (req, res) {
 
   const short = req.params.shortURL;
 
-  if (db.urls[short]) {
-    res.redirect(db.urls[short]);
+  if (!db.urls[short]) {
+    res.render("not_found", {user: req.session.user_id});
+    return;
   }
+
+  controller.addAnalytics(short, req);
+  res.redirect(db.urls[short].url);
 
 };
