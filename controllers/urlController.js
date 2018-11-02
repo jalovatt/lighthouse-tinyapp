@@ -9,7 +9,7 @@ exports.getURLs = function (req, res) {
   let id = req.session.user_id;
 
   if (!id) {
-    res.redirect("/login");
+    res.render("not_allowed");
     return;
   }
 
@@ -62,7 +62,7 @@ exports.postURLsID = function (req, res) {
     return;
   }
 
-  db.urls[req.params.id] = req.body.newURL;
+  db.urls[req.params.id].url = req.body.newURL;
   res.redirectLocal();
 
 };
