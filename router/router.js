@@ -25,8 +25,6 @@ router.post("/logout",          indexController.postLogout);
 router.get( "/register",        indexController.getRegister);
 router.post("/register",        indexController.postRegister);
 
-router.get( "/hello",           indexController.getHello);
-
 router.get( "/urls",            urlController.getURLs);
 router.post("/urls",            urlController.postURLs);
 
@@ -37,11 +35,10 @@ router.post("/urls/:id",        urlController.postURLsID);
 
 router.post("/urls/:id/delete", urlController.postDelete);
 
-
-
 router.get( "/u/:shortURL",     urlController.getShortURL);
 
 router.get( "/urls.json",       urlController.getURLsJSON);
 
+router.get( "/*",               indexController.notFound);
 
 module.exports = router;

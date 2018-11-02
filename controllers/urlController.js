@@ -42,10 +42,14 @@ exports.postDelete = function (req, res) {
 };
 
 exports.getNew = function (req, res) {
-  let templateVars = {
-    user: db.users[req.cookies["user_id"]]
-  };
-  res.render("urls_new", templateVars);
+  var user = db.users[req.cookies["user_id"]];
+
+  if (user) {
+    res.render("urls_new", {user});
+  } else {
+    res.redirect("/login");
+  }
+
 };
 
 exports.getShortURL = function (req, res) {

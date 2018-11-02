@@ -3,12 +3,14 @@
   form { display: inline-block; }
   .err { color: red; }
   input[type=text] { width: 300px }
+  a { color: black; text-decoration: none; }
 </style>
-
-<h1>TinyApp</h1>
-  <% if (locals.user) { %>
-    Logged in as <%= user.email %> | <form method="POST" action="/logout"><input type="submit" value="Log Out"></form>
-  <% } else { %>
-    <form method="GET" action="/login"><input type="submit" value="Log In"></form> <form method="GET" action="/register"><input type="submit" value="Register"></form>
-  <% } %>
+<header>
+  <h1><a href="/">TinyApp</a></h1>
+    <% if (locals.user) { %>
+      Logged in as <%= user.email %> | <form method="POST" action="/logout"><input type="submit" value="Log Out"></form>
+    <% } else { %>
+      <form method="GET" action="/login"><input type="submit" value="Log In"></form> <form method="GET" action="/register"><input type="submit" value="Register"></form>
+    <% } %>
+</header>
 <hr>

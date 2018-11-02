@@ -60,3 +60,7 @@ exports.postRegister = function (req, res) {
   res.redirectLocal();
 
 };
+
+exports.notFound = function (req, res) {
+  res.render("not_found");
+};
