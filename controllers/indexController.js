@@ -24,6 +24,7 @@ exports.getLogin = function (req, res) {
 exports.postLogin = function (req, res) {
 
   const id = controller.validateLogin(req.body.email, req.body.pwd);
+
   if (!id) {
     res.status(403);
     res.render("login", {invalidLogin: true});
@@ -32,11 +33,14 @@ exports.postLogin = function (req, res) {
 
   req.session.user_id = id;
   res.redirectLocal();
+
 };
 
 exports.postLogout = function (req, res) {
+
   req.session = null;
   res.redirect("/");
+
 };
 
 exports.getRegister = function (req, res) {
@@ -53,20 +57,16 @@ exports.postRegister = function (req, res) {
 
   const {email, pwd} = req.body;
   if (controller.userExists(email)) {
-    //res.status(400);
     res.render("register", {userExists: true});
     return;
   }
 
   if (email === "" || pwd === "") {
-    //res.status(400);
     res.render("register", {invalidData: true});
     return;
   }
 
-  const id = controller.createNewUser(email, pwd);
-
-  req.session.user_id = id;
+  req.session.user_id = controller.createNewUser(email, pwd);
   res.redirectLocal();
 
 };

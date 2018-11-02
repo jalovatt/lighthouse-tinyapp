@@ -18,6 +18,7 @@ exports.getURLs = function (req, res) {
     user: db.users[id]
   };
   res.render("urls_index", templateVars);
+
 };
 
 exports.postURLs = function (req, res) {
@@ -33,6 +34,7 @@ exports.postURLs = function (req, res) {
   db.urls[str] = {url: req.body.longURL, user: req.session.user_id};
 
   res.redirectLocal(str);
+
 };
 
 exports.getURLsID = function (req, res) {
@@ -70,7 +72,7 @@ exports.postURLsID = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed");
+    res.render("not_allowed", {user: db.users[id]});
     return;
   }
 
@@ -89,7 +91,7 @@ exports.postDelete = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.redirect("not_allowed");
+    res.render("not_allowed", {user: db.users[id]});
     return;
   }
 
@@ -100,6 +102,7 @@ exports.postDelete = function (req, res) {
 
   delete db.urls[req.params.id];
   res.redirectLocal();
+
 };
 
 exports.getNew = function (req, res) {
