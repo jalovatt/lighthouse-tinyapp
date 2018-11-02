@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
   <title>TinyApp</title>
-  <style>
-  form { display: inline-block }
-  </style>
 </head>
 <body>
   <% include ./partials/_header %>
@@ -19,6 +16,6 @@
     <% }); %>
   </table>
   <br>
-  <a href="#">Shorten a URL</a>
+  <form method="GET" action="/new"><input type="submit" value="Shorten a URL"></form>
 </body>
 </html>

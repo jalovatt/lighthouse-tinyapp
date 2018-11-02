@@ -1,31 +1,47 @@
 const db = require("../database/database.js");
 const controller = require("./controllerFunctions.js");
 
-exports.index = function (req, res) {
-  res.send("Hello!");
+
+exports.getIndex = function (req, res) {
+  if (req.cookies["user_id"]) {
+    res.redirect("/urls");
+  } else {
+    res.redirect("/login");
+  }
 };
 
-exports.hello = function (req, res) {
+exports.getHello = function (req, res) {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 };
 
-exports.login = function (req, res) {
-  console.log("login");
-  res.cookie("username", req.body.username);
+exports.getLogin = function (req, res) {
+  res.render("login");
+};
+
+exports.postLogin = function (req, res) {
+
+  var id = controller.validateLogin(req.body.email, req.body.pwd);
+  if (!id) {
+    res.status(403);
+    res.render("login", {invalidLogin: true});
+    return;
+  }
+
+  res.cookie("user_id", id);
   res.redirectLocal();
 };
 
-exports.logout = function (req, res) {
-  res.clearCookie("username");
+exports.postLogout = function (req, res) {
+  res.clearCookie("user_id");
   res.redirectLocal();
 };
 
-exports.register = function (req, res) {
+exports.getRegister = function (req, res) {
 
   res.render("register");
 };
 
-exports.registerUser = function (req, res) {
+exports.postRegister = function (req, res) {
 
   let {email, pwd} = req.body;
   if (controller.userExists(email)) {
@@ -43,7 +59,7 @@ exports.registerUser = function (req, res) {
   let id = controller.generateRandomString();
   db.users[id] = {id, email, pwd};
 
-  res.cookie("username", id);
+  res.cookie("user_id", id);
   res.redirectLocal();
 
 };

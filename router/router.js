@@ -16,32 +16,32 @@ express.response.redirectLocal = function(path) {
 };
 
 
-router.get( "/",                indexController.index);
+router.get( "/",                indexController.getIndex);
 
-router.post("/login",           indexController.login);
-router.post("/logout",          indexController.logout);
+router.get( "/login",           indexController.getLogin);
+router.post("/login",           indexController.postLogin);
+router.post("/logout",          indexController.postLogout);
 
-router.get("/register",         indexController.register);
-router.post("/register",        indexController.registerUser);
+router.get( "/register",        indexController.getRegister);
+router.post("/register",        indexController.postRegister);
 
-router.get( "/hello",           indexController.hello);
+router.get( "/hello",           indexController.getHello);
 
 router.get( "/urls",            urlController.getURLs);
 router.post("/urls",            urlController.postURLs);
 
+router.get( "/urls/new",        urlController.getNew);
+
 router.get( "/urls/:id",        urlController.getURLsID);
 router.post("/urls/:id",        urlController.postURLsID);
 
-router.post("/urls/:id/delete", urlController.delete);
-
-router.get( "/urls/new",        urlController.new);
-
-router.get( "/u/:shortURL",     urlController.u);
-
-router.get( "/urls.json",       urlController.urlsJSON);
+router.post("/urls/:id/delete", urlController.postDelete);
 
 
 
+router.get( "/u/:shortURL",     urlController.getShortURL);
+
+router.get( "/urls.json",       urlController.getURLsJSON);
 
 
 module.exports = router;

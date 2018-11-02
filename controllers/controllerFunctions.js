@@ -16,6 +16,14 @@ exports.generateRandomString = function() {
 
 exports.userExists = function(email) {
 
-  return Object.keys(db.users).find( id => db.users[id].email === email );
+  var id = Object.keys(db.users).find( id => db.users[id].email === email );
+  return (id) ? db.users[id] : null;
+
+};
+
+exports.validateLogin = function(email, pwd) {
+
+  var user = exports.userExists(email);
+  return (user && user.pwd === pwd) ? user.id : null;
 
 };

@@ -4,11 +4,10 @@ const controller = require("./controllerFunctions.js");
 
 
 
-
 exports.getURLs = function (req, res) {
   let templateVars = {
     urls: db.urls,
-    user: db.users[req.cookies["username"]]
+    user: db.users[req.cookies["user_id"]]
   };
   res.render("urls_index", templateVars);
 };
@@ -25,7 +24,7 @@ exports.getURLsID = function (req, res) {
   let templateVars = {
     shortURL: req.params.id,
     longURL: db.urls[req.params.id],
-    user: db.users[req.cookies["username"]]
+    user: db.users[req.cookies["user_id"]]
   };
   res.render("urls_show", templateVars);
 };
@@ -37,19 +36,19 @@ exports.postURLsID = function (req, res) {
 
 };
 
-exports.delete = function (req, res) {
+exports.postDelete = function (req, res) {
   delete db.urls[req.params.id];
   res.redirectLocal();
 };
 
-exports.new = function (req, res) {
+exports.getNew = function (req, res) {
   let templateVars = {
-    user: db.users[req.cookies["username"]]
+    user: db.users[req.cookies["user_id"]]
   };
   res.render("urls_new", templateVars);
 };
 
-exports.u = function (req, res) {
+exports.getShortURL = function (req, res) {
 
   const short = req.params.shortURL;
 
@@ -59,6 +58,6 @@ exports.u = function (req, res) {
 
 };
 
-exports.urlsJSON = function (req, res) {
+exports.getURLsJSON = function (req, res) {
   res.json(db.urls);
 };

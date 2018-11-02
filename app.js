@@ -12,8 +12,9 @@ app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use("/", router);
+app.use(router);
 
 app.listen(config.port, () => {
-  console.log("Listening on port " + config.port + "!");
+  var time = new Date().toLocaleTimeString();
+  console.log(`[${time}] Listening on port ${config.port}`);
 });
