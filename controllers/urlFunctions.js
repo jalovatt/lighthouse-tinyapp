@@ -1,5 +1,9 @@
+// Helpers for urlController.js
+
 const db = require("../database/database.js");
 
+
+// Returns an array of URL objects belonging to a given user ID
 exports.getUserURLs = function(id) {
 
   const out = {};
@@ -13,6 +17,8 @@ exports.getUserURLs = function(id) {
 
 };
 
+
+// Update a URL's database entry with this visit
 exports.addAnalytics = function(urlID, req) {
 
 
