@@ -9,13 +9,13 @@
     <% Object.keys(urls).forEach(key => { %>
       <tr>
         <td><%= key %></td>
-        <td><%= urls[key] %></td>
+        <td><%= urls[key].url %></td>
         <td><form method="GET" action="/urls/<%= key %>"><input type="submit" value="Edit"></form></td>
         <td><form method="POST" action="/urls/<%= key %>/delete"><input type="submit" value="Delete"></form></td>
       </tr>
     <% }); %>
   </table>
   <br>
-  <form method="GET" action="/new"><input type="submit" value="Shorten a URL"></form>
+  <form method="GET" action="/urls/new"><input type="submit" value="Shorten a URL"></form>
 </body>
 </html>

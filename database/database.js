@@ -2,8 +2,8 @@
 // Short URL   Long URL
 exports.urls = {
 
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
+  "b2xVn2": {url: "http://www.lighthouselabs.ca", id: "abc"},
+  "9sm5xK": {url: "http://www.google.com", id: "abc"},
 
 };
 

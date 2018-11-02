@@ -14,7 +14,7 @@ exports.getURLs = function (req, res) {
 
 exports.postURLs = function (req, res) {
   var str = controller.generateRandomString();
-  db.urls[str] = req.body.longURL;
+  db.urls[str] = {url: req.body.longURL, id: req.cookies["user_id"]};
   console.log(req.body.longURL + " -> " + str);
 
   res.redirectLocal(str);
@@ -23,7 +23,7 @@ exports.postURLs = function (req, res) {
 exports.getURLsID = function (req, res) {
   let templateVars = {
     shortURL: req.params.id,
-    longURL: db.urls[req.params.id],
+    longURL: db.urls[req.params.id].url,
     user: db.users[req.cookies["user_id"]]
   };
   res.render("urls_show", templateVars);
