@@ -1,4 +1,5 @@
 const db = require("../database/database.js");
+const bcrypt = require("bcrypt");
 
 exports.generateRandomString = function() {
 
@@ -14,6 +15,16 @@ exports.generateRandomString = function() {
   return out.join("");
 };
 
+
+exports.getHash = function (pwd) {
+  return bcrypt.hashSync(pwd, 10);
+}
+
+exports.checkHash = function (pwd, hash) {
+  return bcrypt.compareSync(pwd, hash);
+}
+
+
 exports.userExists = function(email) {
 
   var id = Object.keys(db.users).find( id => db.users[id].email === email );
@@ -24,7 +35,7 @@ exports.userExists = function(email) {
 exports.validateLogin = function(email, pwd) {
 
   var user = exports.userExists(email);
-  return (user && user.pwd === pwd) ? user.id : null;
+  return (user && exports.checkHash(pwd, user.hash)) ? user.id : null;
 
 };
 

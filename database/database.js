@@ -13,19 +13,7 @@ exports.users = {
   "abc": {
     id: "abc",
     email: "a@b.c",
-    pwd: "abc"
+    hash: "$2b$10$D04/wP11lw/mXI7fqqzVa.QxA8ZU/CKEyoQ2aWQ9lbsom/KLND7tK"
   },
-
-  "a1b2c3": {
-    id: "a1b2c3",
-    email: "user@example.com",
-    pwd: "purple-monkey-dishwasher"
-  },
-
-  "b2l48s": {
-    id: "b2l48s",
-    email: "user2@example2.com",
-    pwd: "crazytownbananapants"
-  }
 
 };

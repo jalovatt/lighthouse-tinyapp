@@ -1,7 +1,6 @@
 const db = require("../database/database.js");
 const controller = require("./controllerFunctions.js");
 
-
 exports.getIndex = function (req, res) {
   if (req.cookies["user_id"]) {
     res.redirect("/urls");
@@ -54,7 +53,9 @@ exports.postRegister = function (req, res) {
   }
 
   let id = controller.generateRandomString();
-  db.users[id] = {id, email, pwd};
+
+  const hash = controller.getHash(pwd);
+  db.users[id] = {id, email, hash};
 
   res.cookie("user_id", id);
   res.redirectLocal();
