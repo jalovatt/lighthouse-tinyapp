@@ -2,7 +2,7 @@ const db = require("../database/database.js");
 const controller = require("./controllerFunctions.js");
 
 exports.getIndex = function (req, res) {
-  if (req.cookies["user_id"]) {
+  if (req.session.user_id) {
     res.redirect("/urls");
   } else {
     res.redirect("/login");
@@ -23,12 +23,12 @@ exports.postLogin = function (req, res) {
     return;
   }
 
-  res.cookie("user_id", id);
+  req.session.user_id = id;
   res.redirectLocal();
 };
 
 exports.postLogout = function (req, res) {
-  res.clearCookie("user_id");
+  req.session = null;
   res.redirect("/");
 };
 
@@ -57,7 +57,7 @@ exports.postRegister = function (req, res) {
   const hash = controller.getHash(pwd);
   db.users[id] = {id, email, hash};
 
-  res.cookie("user_id", id);
+  req.session.user_id = id;
   res.redirectLocal();
 
 };

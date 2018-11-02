@@ -18,11 +18,11 @@ exports.generateRandomString = function() {
 
 exports.getHash = function (pwd) {
   return bcrypt.hashSync(pwd, 10);
-}
+};
 
 exports.checkHash = function (pwd, hash) {
   return bcrypt.compareSync(pwd, hash);
-}
+};
 
 
 exports.userExists = function(email) {

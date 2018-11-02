@@ -6,7 +6,7 @@ const controller = require("./controllerFunctions.js");
 
 exports.getURLs = function (req, res) {
 
-  let id = req.cookies["user_id"];
+  let id = req.session.user_id;
   let templateVars = {
     urls: controller.getUserURLs(id),
     user: db.users[id]
@@ -16,14 +16,14 @@ exports.getURLs = function (req, res) {
 
 exports.postURLs = function (req, res) {
   var str = controller.generateRandomString();
-  db.urls[str] = {url: req.body.longURL, user: req.cookies["user_id"]};
+  db.urls[str] = {url: req.body.longURL, user: req.session.user_id};
   console.log(req.body.longURL + " -> " + str);
 
   res.redirectLocal(str);
 };
 
 exports.getURLsID = function (req, res) {
-  let id = req.cookies["user_id"];
+  let id = req.session.user_id;
 
   if (db.urls[req.params.id].user !== id) {
     res.render("not_allowed", {user: db.users[id]});
@@ -59,7 +59,7 @@ exports.postDelete = function (req, res) {
 };
 
 exports.getNew = function (req, res) {
-  var user = db.users[req.cookies["user_id"]];
+  var user = db.users[req.session.user_id];
 
   if (user) {
     res.render("urls_new", {user});
