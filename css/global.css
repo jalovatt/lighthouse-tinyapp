@@ -75,8 +75,7 @@ table {
 }
 
 td, th {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 0px 8px;
 }
 
 form {
@@ -87,6 +86,10 @@ form {
 .err {
   color: red;
 
+}
+
+input[type=text] {
+  margin-bottom: 3px;
 }
 
 .longURL {
