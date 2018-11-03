@@ -30,76 +30,36 @@
 }
 
 body {
-
   padding: 0;
   margin: 0;
-
   font-family: var(--sans);
-
   color: var(--black);
   background-color: var(--white);
-
   text-align: center;
-
 }
 
 header {
-
   text-align: center;
-
   color: var(--white);
   background-color: var(--black);
+}
 
 
-
+a {
+  text-decoration: none;
 }
 
 h1 {
-
   letter-spacing: -8px;
   margin: 0;
   padding-top: 0.5em;
 }
 
-.appTitle {
-
-
-  font-size: 1.5em;
-  color: var(--white);
-  transition: color 0.5s;
-
-  font-family: var(--serif);
-
-
-}
-
-.appTitle:hover {
-
-    color: white;
-
-}
-
 h2 {
-
   padding-top: 0.5em;
-
   font-size: 1.2em;
   font-family: var(--serif);
   text-align: center;
-
-}
-
-.loginStatus {
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-.loginID {
-
-  color: white;
-  font-weight: bold;
-  margin-right: 16px;
-
 }
 
 table {
@@ -113,75 +73,6 @@ td, th {
 
 form {
   display: inline-block;
-
-}
-
-.err {
-  color: red;
-
-}
-
-input[type=text] {
-  margin-bottom: 3px;
-}
-
-.longURL {
-  width: 40ch;
-
-}
-
-.shortURL {
-  text-align: center;
-  width: 10ch;
-}
-
-input[type=submit] {
-
-  padding: 0.3rem 1rem;
-
-  border: none;
-  border-radius: 2px;
-  background-color: var(--black);
-  color: var(--white);
-  outline: none;
-
-  font-weight: bold;
-
-  transition: color 0.5s;
-  transition: background-color 0.5s;
-
-}
-
-input[type=submit]:hover {
-
-  color: white;
-  background-color: black;
-
-}
-
-.headerButton[type=submit] {
-
-  color: var(--black);
-  background-color: var(--white);
-
-}
-
-.headerButton[type=submit]:hover {
-
-  color: black;
-  background-color: white;
-
-}
-
-.shortenButton {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-a {
-
-  text-decoration: none;
-
 }
 
 label {
@@ -190,3 +81,79 @@ label {
   width: 110px;
   padding-right: 8px;
 }
+
+input[type=text] {
+  margin-bottom: 3px;
+}
+
+input[type=submit] {
+  padding: 0.3rem 1rem;
+  border: none;
+  border-radius: 2px;
+  background-color: var(--black);
+  color: var(--white);
+  outline: none;
+  font-weight: bold;
+  transition: color 0.5s;
+  transition: background-color 0.5s;
+}
+
+input[type=submit]:hover {
+  color: white;
+  background-color: black;
+}
+
+
+
+
+.appTitle {
+  color: var(--white);
+  transition: color 0.5s;
+  font-family: var(--serif);
+  font-size: 1.5em;
+}
+
+.appTitle:hover {
+  color: white;
+}
+
+.loginStatus {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.loginID {
+  color: white;
+  font-weight: bold;
+  margin-right: 16px;
+}
+
+.headerButton[type=submit] {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.headerButton[type=submit]:hover {
+  color: black;
+  background-color: white;
+}
+
+.shortURL {
+  text-align: center;
+  width: 10ch;
+}
+
+.longURL {
+  width: 40ch;
+}
+
+.shortenButton {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.err {
+  color: red;
+}
+
+
