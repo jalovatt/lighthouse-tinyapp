@@ -11,7 +11,9 @@ exports.get_urls_user = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed");
+    res
+      .status(403)
+      .render("not_allowed");
     return;
   }
 
@@ -30,7 +32,9 @@ exports.post_urls_user = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed");
+    res
+      .status(403)
+      .render("not_allowed");
     return;
   }
 
@@ -55,12 +59,16 @@ exports.get_url_id = function (req, res) {
   const user = db.users[id];
 
   if (!db.urls[shortURL]) {
-    res.render("not_found", {user});
+    res
+      .status(403)
+      .render("not_found", {user});
     return;
   }
 
-  if (db.urls[shortURL].user !== id) {
-    res.render("not_yours", {user});
+  if (db.urls[shortURL].owner !== id) {
+    res
+      .status(403)
+      .render("not_yours", {user});
     return;
   }
 
@@ -83,12 +91,16 @@ exports.put_url_id = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed");
+    res
+      .status(403)
+      .render("not_allowed");
     return;
   }
 
-  if (db.urls[req.params.id].user !== id) {
-    res.render("not_yours", {user: db.users[id]});
+  if (db.urls[req.params.id].owner !== id) {
+    res
+      .status(403)
+      .render("not_yours", {user: db.users[id]});
     return;
   }
 
@@ -104,12 +116,16 @@ exports.delete_url = function (req, res) {
   const id = req.session.user_id;
 
   if (!id) {
-    res.render("not_allowed");
+    res
+      .status(403)
+      .render("not_allowed");
     return;
   }
 
-  if (db.urls[req.params.id].user !== id) {
-    res.render("not_yours", {user: db.users[id]});
+  if (db.urls[req.params.id].owner !== id) {
+    res
+      .status(403)
+      .render("not_yours", {user: db.users[id]});
     return;
   }
 
@@ -146,7 +162,9 @@ exports.get_url_short = function (req, res) {
   const short = req.params.shortURL;
 
   if (!db.urls[short]) {
-    res.render("not_found", {user: db.users[req.session.user_id]});
+    res
+      .status(404)
+      .render("not_found", {user: db.users[req.session.user_id]});
     return;
   }
 

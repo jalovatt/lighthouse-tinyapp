@@ -32,8 +32,9 @@ exports.post_login = function (req, res) {
   const id = controller.validateLogin(req.body.email, req.body.pwd);
 
   if (!id) {
-    res.status(403);
-    res.render("login", {invalidLogin: true});
+    res
+      .status(403)
+      .render("login", {invalidLogin: true});
     return;
   }
 
@@ -66,12 +67,16 @@ exports.post_register_user = function (req, res) {
 
   const {email, pwd} = req.body;
   if (controller.userExists(email)) {
-    res.render("register", {userExists: true});
+    res
+      .status(400)
+      .render("register", {userExists: true});
     return;
   }
 
   if (email === "" || pwd === "") {
-    res.render("register", {invalidData: true});
+    res
+      .status(400)
+      .render("register", {invalidData: true});
     return;
   }
 

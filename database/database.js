@@ -2,7 +2,7 @@ exports.urls = {
 
   "b2xVn2": {
     url: "http://www.lighthouselabs.ca",
-    user: "abc",
+    owner: "abc",
     created: new Date("2018-11-03T03:49:17.724Z"),
     visits: [
       {
@@ -17,40 +17,40 @@ exports.urls = {
     uniqueVisitors: 2
   },
   "9sm5xK": {
-    "url": "http://www.google.com",
-    "user": "abc",
-    "created": new Date("2018-11-01T05:49:17.724Z"),
-    "visits": [
+    url: "http://www.google.com",
+    owner: "abc",
+    created: new Date("2018-11-01T05:49:17.724Z"),
+    visits: [
       {
-        "date": new Date("2018-11-02T07:49:23.749Z"),
-        "id": 1
+        date: new Date("2018-11-02T07:49:23.749Z"),
+        id: 1
       },
       {
-        "date": new Date("2018-11-02T08:51:18.747Z"),
-        "id": 1
+        date: new Date("2018-11-02T08:51:18.747Z"),
+        id: 1
       },
       {
-        "date": new Date("2018-11-03T12:18:38.185Z"),
-        "id": 2
+        date: new Date("2018-11-03T12:18:38.185Z"),
+        id: 2
       },
       {
-        "date": new Date("2018-11-03T12:18:57.210Z"),
-        "id": 3
+        date: new Date("2018-11-03T12:18:57.210Z"),
+        id: 3
       },
       {
-        "date": new Date("2018-11-03T12:19:04.794Z"),
-        "id": 4
+        date: new Date("2018-11-03T12:19:04.794Z"),
+        id: 4
       },
       {
-        "date": new Date("2018-11-03T12:19:22.269Z"),
-        "id": 5
+        date: new Date("2018-11-03T12:19:22.269Z"),
+        id: 5
       },
       {
-        "date": new Date("2018-11-03T12:19:25.395Z"),
-        "id": "5"
+        date: new Date("2018-11-03T12:19:25.395Z"),
+        id: "5"
       }
     ],
-    "uniqueVisitors": 5
+    uniqueVisitors: 5
   },
 
 };

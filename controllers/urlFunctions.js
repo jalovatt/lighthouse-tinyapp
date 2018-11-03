@@ -9,7 +9,7 @@ exports.getUserURLs = function(id) {
 
   const out = {};
   Object.keys(db.urls).forEach( entry => {
-    if (db.urls[entry].user === id) {
+    if (db.urls[entry].owner === id) {
       out[entry] = db.urls[entry];
     }
   });
