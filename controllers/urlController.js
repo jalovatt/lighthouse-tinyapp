@@ -1,3 +1,5 @@
+// URL-related routes
+
 const controller = require("./urlFunctions.js");
 const db = require("../database/database.js");
 
@@ -21,6 +23,7 @@ exports.get_urls_user = function (req, res) {
 
 };
 
+
 exports.post_urls_user = function (req, res) {
 
   const id = req.session.user_id;
@@ -36,6 +39,7 @@ exports.post_urls_user = function (req, res) {
   res.redirectLocal(str);
 
 };
+
 
 exports.get_url_id = function (req, res) {
 
@@ -68,6 +72,7 @@ exports.get_url_id = function (req, res) {
 
 };
 
+
 exports.post_url_id = function (req, res) {
 
   const id = req.session.user_id;
@@ -86,6 +91,7 @@ exports.post_url_id = function (req, res) {
   res.redirectLocal();
 
 };
+
 
 exports.post_url_delete = function (req, res) {
 
@@ -106,6 +112,7 @@ exports.post_url_delete = function (req, res) {
 
 };
 
+
 exports.get_urls_new = function (req, res) {
 
   const id = req.session.user_id;
@@ -124,6 +131,7 @@ exports.get_urls_new = function (req, res) {
   }
 
 };
+
 
 exports.get_url_short = function (req, res) {
 

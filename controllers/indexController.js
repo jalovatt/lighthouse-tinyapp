@@ -1,4 +1,9 @@
+// User-related and misc. routes
+
 const controller = require("./indexFunctions.js");
+
+
+
 
 exports.get_index = function (req, res) {
 
@@ -21,6 +26,7 @@ exports.get_login = function (req, res) {
 
 };
 
+
 exports.post_login = function (req, res) {
 
   const id = controller.validateLogin(req.body.email, req.body.pwd);
@@ -36,12 +42,14 @@ exports.post_login = function (req, res) {
 
 };
 
+
 exports.post_logout = function (req, res) {
 
   req.session = null;
   res.redirect("/");
 
 };
+
 
 exports.get_register_user = function (req, res) {
 
@@ -52,6 +60,7 @@ exports.get_register_user = function (req, res) {
   }
 
 };
+
 
 exports.post_register_user = function (req, res) {
 
@@ -70,6 +79,7 @@ exports.post_register_user = function (req, res) {
   res.redirectLocal();
 
 };
+
 
 exports.not_found = function (req, res) {
   res.render("not_found");

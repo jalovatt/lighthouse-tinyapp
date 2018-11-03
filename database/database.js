@@ -1,5 +1,3 @@
-
-// Short URL   Long URL
 exports.urls = {
 
   "b2xVn2": {url: "http://www.lighthouselabs.ca", user: "abc"},
@@ -7,7 +5,7 @@ exports.urls = {
 
 };
 
-// user = {id: a1b2c3, name: Adam, password: ?}
+
 exports.users = {
 
   "abc": {
