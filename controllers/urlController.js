@@ -41,7 +41,7 @@ exports.post_urls_user = function (req, res) {
 };
 
 
-// Allows editing a given URL
+// Allows editing a given URL and viewing analytics
 exports.get_url_id = function (req, res) {
 
   const id = req.session.user_id;
@@ -66,8 +66,10 @@ exports.get_url_id = function (req, res) {
 
   const templateVars = {
     shortURL,
-    longURL: db.urls[shortURL].url,
-    user
+    //longURL: db.urls[shortURL].url,
+    user,
+    ...db.urls[shortURL]
+
   };
   res.render("urls_show", templateVars);
 
