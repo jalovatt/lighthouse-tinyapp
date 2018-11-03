@@ -2,44 +2,57 @@
 
 <h2>URL Details</h2>
 
-<table>
-  <tr>
-    <th>Short URL</th>
-    <th>Destination</th>
-  </tr>
-  <tr>
-    <td><input type="text" readonly class="shortURL" value="localhost:8080/u/<%= shortURL %>"></td>
-    <form method="POST" action="/urls/<%= shortURL %>?_method=PUT">
-      <td><input type="text" class="longURL" name="newURL" value="<%= url %>"></td>
-      <td><input type="submit" value="Update"></td>
-    </form>
-  </tr>
-</table>
-<br>
-<h3><span class="visitorsSince">Traffic since <%= fTime(created) %>, <%= fDate(created) %></span></h3>
-<table>
-  <tr>
-    <th>Visits</th>
-    <th>Unique Visitors</th>
-  </tr>
-  <tr>
-    <td><%= visits.length %></td>
-    <td><%= uniqueVisitors %></td>
-  </tr>
-</table>
-<br>
-<table class="visitTable">
-  <tr>
-    <th class="visitorColumn">Visitor</th>
-    <th class="dateColumn">Date</th>
-  </tr>
-  <% visits.forEach( visit => { %>
-    <tr>
-      <td><%= visit.id %></td>
-      <td><%= fTime(visit.date) %>, <%= fDate(visit.date) %></td>
-    </tr>
-  <% }); %>
+<form method="POST" action="/urls/<%= shortURL %>?_method=PUT">
+  <div class="blockWrapper">
+  <div class="colWrapper">
+    <aside class="colLeft">
+      <h4>Short URL</h4>
+      <input type="text" readonly class="shortURL" value="localhost:8080/u/<%= shortURL %>">
+    </aside>
+    <section class="colCenter">
+      <h4>Destination</h4>
+      <input type="text" class="longURL" name="newURL" value="<%= url %>">
+    </section>
+    <aside class="colRight">
+      <h4>&nbsp;</h4>   <!-- To keep the vertical alignment -->
+      <input type="submit" value="Update">
+    </aside>
+  </div>
+  </div>
+</form>
 
-</table>
+
+<br><br>
+<h3><span class="visitorsSince">Traffic since <%= fTime(created) %>, <%= fDate(created) %></span></h3>
+<br>
+
+<div class="blockWrapper">
+<div class="colWrapper">
+  <section class="colCenter">
+    <table class="visitTable">
+      <tr>
+        <th>Visitors</th>
+        <th>Total Visits</th>
+      </tr>
+      <tr>
+        <td><%= uniqueVisitors %></td>
+        <td><%= visits.length %></td>
+      </tr>
+      <tr class="tableSpacer"></tr>
+      <tr>
+        <th>Visitor</th>
+        <th>Date</th>
+      </tr>
+      <% visits.forEach( visit => { %>
+        <tr>
+          <td><%= visit.id %></td>
+          <td><%= fTime(visit.date) %>, <%= fDate(visit.date) %></td>
+        </tr>
+      <% }); %>
+
+    </table>
+  </section>
+</div>
+</div>
 
 <% include ./partials/_footer %>

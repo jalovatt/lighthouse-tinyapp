@@ -30,6 +30,15 @@
             "Century Schoolbook L",
             Georgia,
             serif;
+
+}
+
+html {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: inherit;
 }
 
 body {
@@ -39,6 +48,7 @@ body {
   color: var(--black);
   background-color: var(--white);
   text-align: center;
+
 }
 
 header {
@@ -71,13 +81,13 @@ h3 {
   text-align: center;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
+h4 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 td, th {
-  padding: 0px 8px;
+
 }
 
 form {
@@ -87,11 +97,11 @@ form {
 label {
   display: inline-block;
   text-align: right;
-  width: 110px;
+  width: 140px;
   padding-right: 8px;
 }
 
-input[type=text] {
+input[type=text], input[type=email] {
   margin-bottom: 3px;
 }
 
@@ -147,12 +157,20 @@ input[type=submit]:hover {
   background-color: white;
 }
 
-.shortURL {
+.tableSide {
   width: 18vw;
 }
 
-.longURL {
+.tableMain {
   width: 30vw;
+}
+
+.shortURL {
+  width: 100%;
+}
+
+.longURL {
+  width: 100%;
 }
 
 .dateColumn {
@@ -161,8 +179,14 @@ input[type=submit]:hover {
 
 .visitTable {
   border-collapse: collapse;
+  width: 100%;
 }
 
+.tableSpacer {
+  height: 1em;
+}
+
+/*
 .visitTable tr:nth-child(odd) {
   background-color: var(--rowA);
 }
@@ -170,6 +194,7 @@ input[type=submit]:hover {
 .visitTable tr:nth-child(even) {
   background-color: var(--rowB);
 }
+*/
 
 .shortenButton {
   margin-left: auto;
@@ -180,4 +205,27 @@ input[type=submit]:hover {
   color: red;
 }
 
+.blockWrapper {
+  display: inline-block;
+}
+
+.colWrapper {
+  display: flex;
+  line-height: 1.8;
+}
+
+.colLeft {
+  padding-right: 16px;
+  width: 20vw;
+}
+
+.colCenter {
+  width: 30vw;
+}
+
+.colRight {
+  text-align: left;
+  padding-left: 16px;
+  width: 20vw;
+}
 
