@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
+const methodOverride = require("method-override");
 const router = require("./router/router");
 const config = require("./config/config");
 
@@ -18,6 +19,8 @@ app.use(cookieSession({
 
 // All views share a global stylesheet
 app.use("/css", express.static(__dirname + "/css"));
+
+app.use(methodOverride("_method"));
 
 app.use(router);
 

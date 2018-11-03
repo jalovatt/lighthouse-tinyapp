@@ -5,7 +5,7 @@ const db = require("../database/database.js");
 
 
 
-
+// Shows the URLs owned by the current user
 exports.get_urls_user = function (req, res) {
 
   const id = req.session.user_id;
@@ -24,6 +24,7 @@ exports.get_urls_user = function (req, res) {
 };
 
 
+// Stores a new shortened URL
 exports.post_urls_user = function (req, res) {
 
   const id = req.session.user_id;
@@ -41,6 +42,7 @@ exports.post_urls_user = function (req, res) {
 };
 
 
+// Allows editing a given URL
 exports.get_url_id = function (req, res) {
 
   const id = req.session.user_id;
@@ -73,7 +75,8 @@ exports.get_url_id = function (req, res) {
 };
 
 
-exports.post_url_id = function (req, res) {
+// Amends an entry with a new URL
+exports.put_url_id = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -93,7 +96,8 @@ exports.post_url_id = function (req, res) {
 };
 
 
-exports.post_url_delete = function (req, res) {
+// Deletes a stored URL
+exports.delete_url = function (req, res) {
 
   const id = req.session.user_id;
 
@@ -113,6 +117,7 @@ exports.post_url_delete = function (req, res) {
 };
 
 
+// Allows shortening a new URL
 exports.get_urls_new = function (req, res) {
 
   const id = req.session.user_id;
@@ -133,6 +138,7 @@ exports.get_urls_new = function (req, res) {
 };
 
 
+// Redirects to a shortURL's destination
 exports.get_url_short = function (req, res) {
 
   const short = req.params.shortURL;

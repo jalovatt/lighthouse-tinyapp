@@ -9,7 +9,7 @@
   </tr>
   <tr>
     <td><input type="text" readonly class="shortURL" value="<%= shortURL %>"></td>
-    <form method="POST" action="/urls/<%= shortURL %>">
+    <form method="POST" action="/urls/<%= shortURL %>?_method=PUT">
       <td><input type="text" class="longURL" name="newURL" value="<%= longURL %>"></td>
       <td><input type="submit" value="Update"></td>
     </form>
