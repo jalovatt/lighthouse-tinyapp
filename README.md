@@ -1,11 +1,11 @@
 # TinyApp
 
-## Problem Statement
+This project aims to replicate the behavior of URL-shortening sites like https://goo.gl/.
 
-Replicate the behavior of URL-shortening sites like (https://goo.gl/)[https://goo.gl/].
+Once registered, users can shorten URLs, view URLs they've shortened along with visitor data for each, edit URLs, or delete them entirely.
 
-## Expected Usage
+## Usage
 
 - Clone and `npm install` this repository.
-- 'npm start` or `node tinyapp.js` to start the server.
-- Direct your web browser to [localhost:8080/]
+- `npm start` to start the server (uses _nodemon_).
+- Direct your web browser to [localhost:8080/](localhost:8080/)
