@@ -55,6 +55,8 @@ header {
 }
 
 h1 {
+
+  letter-spacing: -8px;
   margin: 0;
   padding-top: 0.5em;
 }
@@ -81,6 +83,7 @@ h2 {
 
   padding-top: 0.5em;
 
+  font-size: 1.2em;
   font-family: var(--serif);
   text-align: center;
 
