@@ -68,8 +68,9 @@ exports.get_url_id = function (req, res) {
     shortURL,
     //longURL: db.urls[shortURL].url,
     user,
-    ...db.urls[shortURL]
-
+    ...db.urls[shortURL],
+    fDate: controller.formatDate,
+    fTime: controller.formatTime
   };
   res.render("urls_show", templateVars);
 

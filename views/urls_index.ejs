@@ -7,7 +7,7 @@
   </tr>
   <% Object.keys(urls).forEach(key => { %>
     <tr>
-      <td><input type="text" readonly class="shortURL" value="<%= key %>"></td>
+      <td><input type="text" readonly class="shortURL" value="localhost:8080/u/<%= key %>"></td>
       <td><input type="text" readonly class="longURL" value="<%= urls[key].url %>"></td>
       <td><form method="GET" action="/urls/<%= key %>"><input type="submit" value="Edit"></form></td>
       <td><form method="POST" action="/urls/<%= key %>/delete?_method=DELETE"><input type="submit" value="Delete"></form></td>

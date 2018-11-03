@@ -40,11 +40,8 @@ exports.addVisit = function(urlID, req, res) {
 
 };
 
-exports.newData = function() {
-  return {created: new Date(), visits: [], uniqueVisitors: 0};
-};
 
-
+// Generate a new and unused short URL ID
 exports.newShortURL = function() {
 
   let id;
@@ -56,13 +53,50 @@ exports.newShortURL = function() {
 }
 
 
+// Add a new URL to the database
 exports.addURL = function(url, userID) {
 
   const id = exports.newShortURL();
 
-  db.urls[id] = {url: url, user: userID, ...exports.newData()};
+  db.urls[id] = {
+    url: url,
+    user: userID,
+    ...exports.newData(),
+    created: new Date(),
+    visits: [],
+    uniqueVisitors: 0
+  };
 
-  console.log(JSON.stringify(db.urls[id], null, 2));
   return id;
 
 }
+
+
+// Returns a given Date in the form "02 Feb 2018"
+exports.formatDate = function(d) {
+
+  return d.toLocaleDateString(
+    "en-us",
+    {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+
+};
+
+
+// Returns a given Date's time in the form "1:49 AM MDT"
+// Localization is hardcoded to 'en-us', Mountain time
+exports.formatTime = function(d, ) {
+
+  return d.toLocaleTimeString(
+    "en-us",
+    {
+      hour12: true,
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZoneName: "short"
+    });
+
+};
