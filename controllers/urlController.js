@@ -34,8 +34,7 @@ exports.post_urls_user = function (req, res) {
     return;
   }
 
-  const str = controller.generateRandomString();
-  db.urls[str] = {url: req.body.longURL, user: req.session.user_id};
+  const str = controller.addURL(req.body.longURL, id);
 
   res.redirectLocal(str);
 
@@ -148,7 +147,9 @@ exports.get_url_short = function (req, res) {
     return;
   }
 
-  controller.addAnalytics(short, req);
+  controller.addVisit(short, req, res);
+
+  console.log(JSON.stringify(db.urls[short], null, 2));
   res.redirect(db.urls[short].url);
 
 };

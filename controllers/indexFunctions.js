@@ -1,5 +1,7 @@
 // Helpers for indexController.js
 
+const helpers = require("./controllerFunctions");
+
 const db = require("../database/database.js");
 const bcrypt = require("bcrypt");
 
@@ -13,22 +15,6 @@ exports.getHash = function (pwd) {
 
 exports.checkHash = function (pwd, hash) {
   return bcrypt.compareSync(pwd, hash);
-};
-
-
-exports.generateRandomString = function() {
-
-  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV0123456789";
-  const range = chars.length;
-
-  const out = [];
-  for (let i = 0; i < 6; i++) {
-    const idx = Math.floor(Math.random() * range);
-    out.push(chars[idx]);
-  }
-
-  return out.join("");
-
 };
 
 
@@ -50,10 +36,21 @@ exports.validateLogin = function(email, pwd) {
 };
 
 
+exports.newUserID = function() {
+
+  let id;
+  do {
+    id = helpers.generateRandomString();
+  } while (db.users[id]);
+  return id;
+
+};
+
+
 // Registers a new user in the database and returns their ID
 exports.createNewUser = function(email, pwd) {
 
-  const id = exports.generateRandomString();
+  const id = exports.newUserID();
 
   const hash = exports.getHash(pwd);
   db.users[id] = {id, email, hash};

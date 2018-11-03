@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const methodOverride = require("method-override");
 const router = require("./router/router");
@@ -10,6 +11,8 @@ const app = express();
 app.set("view engine", "ejs");
 
 app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(cookieParser());
 
 app.use(cookieSession({
   name: "session",
