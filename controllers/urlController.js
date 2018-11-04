@@ -65,7 +65,9 @@ exports.get_url_id = function (req, res) {
     return;
   }
 
-  if (db.urls[shortURL].owner !== id) {
+  const urlEntry = db.urls[shortURL];
+
+  if (urlEntry.owner !== id) {
     res
       .status(403)
       .render("not_yours", {user});
@@ -74,9 +76,12 @@ exports.get_url_id = function (req, res) {
 
   const templateVars = {
     shortURL,
-    //longURL: db.urls[shortURL].url,
     user,
-    ...db.urls[shortURL],
+    url: urlEntry.url,
+    owner: urlEntry.owner,
+    created: urlEntry.created,
+    visits: urlEntry.visits,
+    uniqueVisitors: urlEntry.uniqueVisitors,
     fDate: controller.formatDate,
     fTime: controller.formatTime
   };

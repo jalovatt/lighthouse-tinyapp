@@ -33,7 +33,7 @@ exports.addVisit = function(urlID, req, res) {
   const visit = {
     date: new Date(),
     id
-  }
+  };
 
   db.urls[urlID].visits.push(visit);
   console.log(JSON.stringify(db.urls[id], null, 2));
@@ -48,9 +48,9 @@ exports.newShortURL = function() {
   do {
     id = helpers.generateRandomString();
   } while (db.urls[id]);
-  return id
+  return id;
 
-}
+};
 
 
 // Add a new URL to the database
@@ -60,8 +60,7 @@ exports.addURL = function(url, userID) {
 
   db.urls[id] = {
     url: url,
-    user: userID,
-    ...exports.newData(),
+    owner: userID,
     created: new Date(),
     visits: [],
     uniqueVisitors: 0
@@ -69,7 +68,7 @@ exports.addURL = function(url, userID) {
 
   return id;
 
-}
+};
 
 
 // Returns a given Date in the form "02 Feb 2018"
@@ -88,7 +87,7 @@ exports.formatDate = function(d) {
 
 // Returns a given Date's time in the form "1:49 AM MDT"
 // Localization is hardcoded to 'en-us', Mountain time
-exports.formatTime = function(d, ) {
+exports.formatTime = function(d) {
 
   return d.toLocaleTimeString(
     "en-us",
