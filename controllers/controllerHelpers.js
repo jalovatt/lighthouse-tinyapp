@@ -1,6 +1,6 @@
 // Misc. controller
 
-exports.generateRandomString = function() {
+exports.generateIDString = function() {
 
   const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV0123456789";
   const range = chars.length;

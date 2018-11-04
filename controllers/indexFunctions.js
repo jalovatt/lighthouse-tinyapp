@@ -1,6 +1,6 @@
 // Helpers for indexController.js
 
-const helpers = require("./controllerFunctions");
+const helpers = require("./controllerHelpers");
 
 const db = require("../database/database.js");
 const bcrypt = require("bcrypt");
@@ -8,13 +8,24 @@ const bcrypt = require("bcrypt");
 
 
 
-exports.getHash = function (pwd) {
+const getHash = function (pwd) {
   return bcrypt.hashSync(pwd, 10);
 };
 
 
-exports.checkHash = function (pwd, hash) {
+const checkHash = function (pwd, hash) {
   return bcrypt.compareSync(pwd, hash);
+};
+
+
+const newUserID = function() {
+
+  let id;
+  do {
+    id = helpers.generateIDString();
+  } while (db.users[id]);
+  return id;
+
 };
 
 
@@ -31,18 +42,7 @@ exports.userExists = function(email) {
 exports.validateLogin = function(email, pwd) {
 
   const user = exports.userExists(email);
-  return (user && exports.checkHash(pwd, user.hash)) ? user.id : null;
-
-};
-
-
-exports.newUserID = function() {
-
-  let id;
-  do {
-    id = helpers.generateRandomString();
-  } while (db.users[id]);
-  return id;
+  return (user && checkHash(pwd, user.hash)) ? user.id : null;
 
 };
 
@@ -50,9 +50,9 @@ exports.newUserID = function() {
 // Registers a new user in the database and returns their ID
 exports.createNewUser = function(email, pwd) {
 
-  const id = exports.newUserID();
+  const id = newUserID();
 
-  const hash = exports.getHash(pwd);
+  const hash = getHash(pwd);
   db.users[id] = {id, email, hash};
 
   return id;

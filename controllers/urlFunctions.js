@@ -1,6 +1,6 @@
 // Helpers for urlController.js
 
-const helpers = require("./controllerFunctions");
+const helpers = require("./controllerHelpers");
 const db = require("../database/database.js");
 
 
@@ -42,11 +42,11 @@ exports.addVisit = function(urlID, req, res) {
 
 
 // Generate a new and unused short URL ID
-exports.newShortURL = function() {
+const newShortURL = function() {
 
   let id;
   do {
-    id = helpers.generateRandomString();
+    id = helpers.generateIDString();
   } while (db.urls[id]);
   return id;
 
@@ -56,7 +56,7 @@ exports.newShortURL = function() {
 // Add a new URL to the database
 exports.addURL = function(url, userID) {
 
-  const id = exports.newShortURL();
+  const id = newShortURL();
 
   db.urls[id] = {
     url: url,
