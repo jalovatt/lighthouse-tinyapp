@@ -175,7 +175,6 @@ exports.get_url_short = function (req, res) {
 
   controller.addVisit(short, req, res);
 
-  console.log(JSON.stringify(db.urls[short], null, 2));
   res.redirect(db.urls[short].url);
 
 };

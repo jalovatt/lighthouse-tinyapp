@@ -36,7 +36,6 @@ exports.addVisit = function(urlID, req, res) {
   };
 
   db.urls[urlID].visits.push(visit);
-  console.log(JSON.stringify(db.urls[id], null, 2));
 
 };
 
