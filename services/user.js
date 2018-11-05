@@ -1,8 +1,7 @@
 const db = require("../database/database.js");
-const bcrypt = require("bcrypt");
-
 const helpers = require("./common");
 
+const bcrypt = require("bcrypt");
 
 
 const newUserID = function() {

@@ -11,7 +11,7 @@
     </aside>
     <section class="colCenter">
       <h4>Destination</h4>
-      <input type="text" class="longURL" name="newURL" value="<%= url %>">
+      <input type="text" class="longURL" name="newURL" value="<%= urlEntry.url %>">
     </section>
     <aside class="colRight">
       <h4>&nbsp;</h4>   <!-- To keep the vertical alignment -->
@@ -23,7 +23,7 @@
 
 
 <br><br>
-<h3><span class="visitorsSince">Traffic since <%= fTime(created) %>, <%= fDate(created) %></span></h3>
+<h3><span class="visitorsSince">Traffic since <%= fTime(urlEntry.created) %>, <%= fDate(urlEntry.created) %></span></h3>
 <br>
 
 <div class="blockWrapper">
@@ -35,15 +35,15 @@
         <th>Total Visits</th>
       </tr>
       <tr>
-        <td><%= uniqueVisitors %></td>
-        <td><%= visits.length %></td>
+        <td><%= urlEntry.uniqueVisitors %></td>
+        <td><%= urlEntry.visits.length %></td>
       </tr>
       <tr class="tableSpacer"></tr>
       <tr>
         <th>Visitor</th>
         <th>Date</th>
       </tr>
-      <% visits.forEach( visit => { %>
+      <% urlEntry.visits.forEach( visit => { %>
         <tr>
           <td><%= visit.id %></td>
           <td><%= fTime(visit.date) %>, <%= fDate(visit.date) %></td>

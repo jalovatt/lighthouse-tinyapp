@@ -29,16 +29,16 @@ exports.get_login = function (req, res) {
 
 exports.post_login = function (req, res) {
 
-  const id = userServices.validateLogin(req.body.email, req.body.pwd);
+  const userID = userServices.validateLogin(req.body.email, req.body.pwd);
 
-  if (!id) {
+  if (!userID) {
     res
       .status(403)
       .render("login", {invalidLogin: true});
     return;
   }
 
-  req.session.user_id = id;
+  req.session.user_id = userID;
   res.redirectLocal();
 
 };

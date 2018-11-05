@@ -2,16 +2,15 @@
 
 const userServices = require("../services/user");
 const urlServices = require("../services/url");
-const db = require("../database/database");
-
+const helpers = require("../services/common");
 
 
 // Shows the URLs owned by the current user
 exports.get_urls_user = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res
       .status(403)
       .render("not_allowed");
@@ -19,8 +18,8 @@ exports.get_urls_user = function (req, res) {
   }
 
   const templateVars = {
-    urls: urlServices.getUserURLs(id),
-    user: userServices.getUserEntry(id)
+    urls: urlServices.getUserURLs(userID),
+    user: userServices.getUserEntry(userID)
   };
   res.render("urls_index", templateVars);
 
@@ -30,16 +29,16 @@ exports.get_urls_user = function (req, res) {
 // Stores a new shortened URL
 exports.post_urls_user = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res
       .status(403)
       .render("not_allowed");
     return;
   }
 
-  const str = urlServices.addURL(req.body.longURL, id);
+  const str = urlServices.addURL(req.body.longURL, userID);
 
   res.redirectLocal(str);
 
@@ -49,9 +48,9 @@ exports.post_urls_user = function (req, res) {
 // Allows editing a given URL and viewing analytics
 exports.get_url_id = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res.redirect("/login");
     return;
   }
@@ -67,25 +66,28 @@ exports.get_url_id = function (req, res) {
 
 
 
-  if (urlEntry.owner !== id) {
+  if (urlEntry.owner !== userID) {
     res
       .status(403)
       .render("not_yours", {user});
     return;
   }
 
-  const user = userServices.getUserEntry(id);
+  const user = userServices.getUserEntry(userID);
 
   const templateVars = {
     shortURL: req.params.id,
     user,
+    urlEntry,
+    /*
     url: urlEntry.url,
     owner: urlEntry.owner,
     created: urlEntry.created,
     visits: urlEntry.visits,
     uniqueVisitors: urlEntry.uniqueVisitors,
-    fDate: urlServices.formatDate,
-    fTime: urlServices.formatTime
+    */
+    fDate: helpers.formatDate,
+    fTime: helpers.formatTime
   };
   res.render("urls_show", templateVars);
 
@@ -95,9 +97,9 @@ exports.get_url_id = function (req, res) {
 // Amends an entry with a new URL
 exports.put_url_id = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res
       .status(403)
       .render("not_allowed");
@@ -106,10 +108,10 @@ exports.put_url_id = function (req, res) {
 
   const urlEntry = urlServices.getURLEntry(req.params.id);
 
-  if (urlEntry.owner !== id) {
+  if (urlEntry.owner !== userID) {
     res
       .status(403)
-      .render("not_yours", {user: userServices.getUserEntry(id)});
+      .render("not_yours", {user: userServices.getUserEntry(userID)});
     return;
   }
 
@@ -122,32 +124,33 @@ exports.put_url_id = function (req, res) {
 // Deletes a stored URL
 exports.delete_url = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res
       .status(403)
       .render("not_allowed");
     return;
   }
 
-  const urlEntry = urlServices.getURLEntry(req.params.id);
+  const urlID = req.params.id;
+  const urlEntry = urlServices.getURLEntry(urlID);
 
   if (!urlEntry) {
     res
       .status(404)
-      .render("not_found", {user: userServices.getUserEntry(id)});
+      .render("not_found", {user: userServices.getUserEntry(userID)});
     return;
   }
 
-  if (urlEntry.owner !== id) {
+  if (urlEntry.owner !== userID) {
     res
       .status(403)
-      .render("not_yours", {user: userServices.getUserEntry(id)});
+      .render("not_yours", {user: userServices.getUserEntry(userID)});
     return;
   }
 
-  delete db.urls[req.params.id];
+  urlServices.deleteURLEntry(urlID);
   res.redirectLocal();
 
 };
@@ -156,14 +159,14 @@ exports.delete_url = function (req, res) {
 // Allows shortening a new URL
 exports.get_urls_new = function (req, res) {
 
-  const id = userServices.validCookie(req);
+  const userID = userServices.validCookie(req);
 
-  if (!id) {
+  if (!userID) {
     res.redirect("/login");
     return;
   }
 
-  const user = userServices.getUserEntry(id);
+  const user = userServices.getUserEntry(userID);
 
   if (user) {
     res.render("urls_new", {user});
@@ -177,17 +180,18 @@ exports.get_urls_new = function (req, res) {
 // Redirects to a shortURL's destination
 exports.get_url_short = function (req, res) {
 
-  const short = req.params.shortURL;
+  const urlID = req.params.shortURL;
+  const urlEntry = urlServices.getURLEntry(req.params.shortURL);
 
-  if (!db.urls[short]) {
+  if (!urlEntry) {
     res
       .status(404)
       .render("not_found", {user: userServices.getUserEntry(req.session.user_id)});
     return;
   }
 
-  urlServices.addVisit(short, req, res);
+  urlServices.addVisit(urlID, req, res);
 
-  res.redirect(db.urls[short].url);
+  res.redirect(urlEntry.url);
 
 };

@@ -1,7 +1,6 @@
-// Helpers for urlController.js
-
-const helpers = require("./common");
 const db = require("../database/database.js");
+const helpers = require("./common");
+
 
 
 // Returns the database object for a given URL ID, if it exists
@@ -77,33 +76,6 @@ exports.addURL = function(url, userID) {
 };
 
 
-// Returns a given Date in the form "02 Feb 2018"
-exports.formatDate = function(d) {
-
-  return d.toLocaleDateString(
-    "en-us",
-    {
-      day: "2-digit",
-      month: "short",
-      year: "numeric"
-    });
-
+exports.deleteURLEntry = function(entry) {
+  delete db.urls[entry];
 };
-
-
-// Returns a given Date's time in the form "1:49 AM MDT"
-// Localization is hardcoded to 'en-us', Mountain time
-exports.formatTime = function(d) {
-
-  return d.toLocaleTimeString(
-    "en-us",
-    {
-      hour12: true,
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZoneName: "short"
-    });
-
-};
-
-
