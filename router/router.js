@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const indexController = require("../controllers/indexController");
-const urlController = require("../controllers/urlController.js");
+const indexController = require("../controllers/index");
+const urlController = require("../controllers/url");
 const config = require("../config/config");
 
 

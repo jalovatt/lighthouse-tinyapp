@@ -1,13 +1,13 @@
 // User-related and misc. routes
 
-const controller = require("./indexFunctions.js");
+const userServices = require("../services/user.js");
 
 
 
 
 exports.get_index = function (req, res) {
 
-  if (req.session.user_id) {
+  if (userServices.validCookie(req)) {
     res.redirect("/urls");
   } else {
     res.redirect("/login");
@@ -18,7 +18,7 @@ exports.get_index = function (req, res) {
 
 exports.get_login = function (req, res) {
 
-  if (req.session.user_id) {
+  if (userServices.validCookie(req)) {
     res.redirect("/urls");
   } else {
     res.render("login");
@@ -29,7 +29,7 @@ exports.get_login = function (req, res) {
 
 exports.post_login = function (req, res) {
 
-  const id = controller.validateLogin(req.body.email, req.body.pwd);
+  const id = userServices.validateLogin(req.body.email, req.body.pwd);
 
   if (!id) {
     res
@@ -54,7 +54,7 @@ exports.post_logout = function (req, res) {
 
 exports.get_register_user = function (req, res) {
 
-  if (req.session.user_id) {
+  if (userServices.validCookie(req)) {
     res.redirect("/urls");
   } else {
     res.render("register");
@@ -66,7 +66,7 @@ exports.get_register_user = function (req, res) {
 exports.post_register_user = function (req, res) {
 
   const {email, pwd} = req.body;
-  if (controller.userExists(email)) {
+  if (userServices.userExists(email)) {
     res
       .status(400)
       .render("register", {userExists: true});
@@ -80,7 +80,7 @@ exports.post_register_user = function (req, res) {
     return;
   }
 
-  req.session.user_id = controller.createNewUser(email, pwd);
+  req.session.user_id = userServices.createNewUser(email, pwd);
   res.redirectLocal();
 
 };

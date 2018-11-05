@@ -1,7 +1,14 @@
 // Helpers for urlController.js
 
-const helpers = require("./controllerHelpers");
+const helpers = require("./common");
 const db = require("../database/database.js");
+
+
+// Returns the database object for a given URL ID, if it exists
+exports.getURLEntry = function(id) {
+  return db.urls[id];
+};
+
 
 
 // Returns an array of URL objects belonging to a given user ID
@@ -98,3 +105,5 @@ exports.formatTime = function(d) {
     });
 
 };
+
+

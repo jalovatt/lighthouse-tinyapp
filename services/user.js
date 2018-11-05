@@ -1,21 +1,8 @@
-// Helpers for indexController.js
-
-const helpers = require("./controllerHelpers");
-
 const db = require("../database/database.js");
 const bcrypt = require("bcrypt");
 
+const helpers = require("./common");
 
-
-
-const getHash = function (pwd) {
-  return bcrypt.hashSync(pwd, 10);
-};
-
-
-const checkHash = function (pwd, hash) {
-  return bcrypt.compareSync(pwd, hash);
-};
 
 
 const newUserID = function() {
@@ -35,6 +22,29 @@ exports.userExists = function(email) {
   const id = Object.keys(db.users).find( id => db.users[id].email === email );
   return (id) ? db.users[id] : null;
 
+};
+
+
+// Returns the database entry for a given user ID, if it exists
+exports.getUserEntry = function(id) {
+  return db.users[id];
+};
+
+
+const getHash = function (pwd) {
+  return bcrypt.hashSync(pwd, 10);
+};
+
+
+const checkHash = function (pwd, hash) {
+  return bcrypt.compareSync(pwd, hash);
+};
+
+
+// Returns a user ID if the given request contains
+// a match session cookie
+exports.validCookie = function(req) {
+  return (db.users[req.session.user_id]) ? req.session.user_id : null;
 };
 
 
